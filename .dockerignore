@@ -1,0 +1,16 @@
+.gradle
+.idea
+build
+gradle
+.git
+.gitignore
+gradlew
+gradlew.bat
+*.md
+*.sh
+*.json
+Dockerfile
+docker-compose.yml
+docker-compose_macOS.yml
+.dockerignore
+.DS_Store

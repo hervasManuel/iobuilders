@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  db:
+    image: arm64v8/mysql:8.0.32-oracle
+    container_name: db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: SuperSecret
+      MYSQL_DATABASE: iobuilders
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - bank-test
+  adminer:
+    image: arm64v8/adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - bank-test
+  bank-backend:
+    container_name: "bank-backend"
+    restart: always
+    build: .
+    ports:
+      - 8081:8081
+    networks:
+      - bank-test
+    depends_on:
+      - db
+volumes:
+  mysql-data:
+networks:
+  bank-test:
+    driver: bridge
